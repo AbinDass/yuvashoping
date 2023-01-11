@@ -1,0 +1,295 @@
+
+
+
+<!-- Header Section End -->
+<%- include('partials/userheader.ejs') -%>
+
+<head>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Shop</h4>
+                    <div class="breadcrumb__links">
+                        <a href="/">Home</a>
+                        <span>Shop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Shop Section Begin -->
+<section class="shop spad">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3">
+                <div class="shop__sidebar">
+
+                    <!-- <div class="shop__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search..." />
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div> -->
+
+                    <div class="shop__sidebar__accordion">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-heading">
+                                    <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shop__sidebar__categories">
+                                            <ul class="nice-scroll">
+                                                <!-- <li><a href="#">Men </a></li> -->
+                                                <% allcategory.forEach(element => { %>                                            
+                                                    <li><a href="/shopnow?cat=<%-element._id%>"><%= element.categoryname %>  </a></li>
+                                                <% }) %>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="card">
+                                <div class="card-heading">
+                                    <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
+                                </div>
+                                <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shop__sidebar__price">
+                                            <ul>
+                                                                                            
+                                                    <li><a href="/shopnow?inc=increment"> Low to hihg </a></li>
+                                                    <li><a href="/shopnow?dec=decrement "> High to low </a></li>
+                                            
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="shop__product__option">
+                    <div class="row">
+                        <!-- <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__left">
+                                <p>Showing 1–12 of 126 results</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__right">
+                                <p>Sort by Price:</p>
+                                <select>
+                                    <option value="">Low To High</option>
+                                    <option value="">$0 - $55</option>
+                                    <option value="">$55 - $100</option>
+                                </select>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+        
+                <div class="row" id="main">
+                        <% for(let i=0;i<productlist.length;i++) {%> 
+                        <div class="col-lg-4 col-md-6 col-sm-6" id="submain">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" style="height: 0%;">
+                                    <a href="/productdetail/<%- productlist[i]._id -%> "> <img src="\admin\uploads\<%- productlist[i].image[0].filename -%>" alt=""></a>                 
+                                    <ul class="product__hover">
+                                        <% if (user) { %>
+                                         
+                                            <% let inwishlist = wishlist.some((item)=> (item.product.toString()== productlist[i]._id.toString())) %>
+                                            <% if (inwishlist) { %>    
+                                                
+                                                
+                                                <button  onclick="removewishlist('<%= productlist[i]._id %>')" >
+                                                    <img   class="icon-heart1 dis-block trans-04 " style="width: 20px;"
+                                                    src="/user/img/icon/heart-red1.svg" alt="ICON">
+                                                </button>
+                                            <% }else{ %>
+                                            <!-- <li>
+                                                <a id="" class="btn" onclick="addwishlist('<%=productlist[i]._id%>')"><img src="/user/img/icon/heart.png" alt="" /></a>
+                                            </li> -->
+                                            <button onclick="addwishlist('<%= productlist[i]._id %>')" >
+                                                <img   class="icon-heart1 dis-block trans-04 " style="width: 20px;"
+                                                src="/user/img/icon/heart.png" alt="ICON">
+                                                
+                                            </button>
+                                            <% } %> 
+
+                                        <% }else{ %>
+                                           <a  href=""  data-toggle="modal" data-target="#exampleModalCenter"> 
+                                                <img   class="icon-heart1 dis-block trans-04 " style="width: 20px;"
+                                                src="/user/img/icon/heart.png" alt="ICON">                               
+                                            </a>
+                                            <% } %> 
+                                        <!-- <li>
+                                            <a href="#"><img src="/user/img/icon/compare.png" alt="" /> <span>Compare</span></a>
+                                        </li> -->
+                                        <!-- <li>
+                                            <a href="#"><img src="/user/img/icon/search.png" alt="" /></a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                                <div class="product__item__text" style="position: relative;">
+                                    <h6><%- productlist[i].brand %> </h6>
+                                    <% if (user) { %>
+                                    <a  onclick="addToCart('<%- productlist[i]._id -%>')" class="add-cart" style="cursor: pointer;">+ Add To Cart</a>
+                                    <% }else{ %> 
+                                    <a href="" data-toggle="modal" data-target="#exampleModalCenter" class="add-cart">+ Add To Cart</a>
+                                    <% } %> 
+                                    <div class="rating">
+                                        <!-- <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i> -->
+                                        <h5 class="text-danger"><%- productlist[i].discount %> <span style="color: black;"> INR </span>OFF </h5>
+                                        <h6><%- productlist[i].description %> </h6>
+                                    </div><br>
+                                    <h5><%- productlist[i].price %> INR</h5>
+                                    <!-- <div class="product__color__select">
+                                        <label for="pc-4">
+                                            <input type="radio" id="pc-4" />
+                                        </label>
+                                        <label class="active black" for="pc-5">
+                                            <input type="radio" id="pc-5" />
+                                        </label>
+                                        <label class="grey" for="pc-6">
+                                            <input type="radio" id="pc-6" />
+                                        </label>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    
+</section>
+
+<!-- Modal -->
+
+<!-- Modal -->
+<% if (user_profile) { %>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">PROFILE</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+        <div class="modal-body">
+          <div class="card-body text-center">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3"><%- user_profile.fullname %></h5>
+            <p class="text-muted mb-1">E MAIL : <%- user_profile.email %></p>
+            <p class="text-muted mb-4">MOBILE : <%- user_profile.mobilenumber %> </p>
+            <div class="d-flex justify-content-center mb-2">
+                <a href="/profile"><button type="button" class="btn btn-success">View Profile</button></a> 
+                <a href="/order-success" class="mx-5"><button type="button" class="btn btn-success">your orders</button></a>
+                 
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="/logout"><button type="button" class="btn btn-danger">Log Out</button></a>
+        </div>
+    </div>
+</div>
+</div>
+
+<% }else{%>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">YOU ARE NOT LOGED IN NOW</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <h4 class="text-danger" style="text-align: center;"> Please Login</h4><br>
+        <a href="/login" style="text-align: center;"><button type="button" class="btn btn-success">Log In</button></a>
+    </div>
+</div>
+</div>
+
+  <%}%>  
+    </div>
+   
+<script>
+    async function addToCart(id){    
+       let cart = await axios.post(`/cart/${id}`)
+        console.log(cart)
+        console.log(cart.data);
+        if(cart.data.status == false){ 
+            Swal.fire({
+            icon: 'error',
+            title: 'product stock unavailable',
+            text: 'sorry , you cant add this product cart'
+            // footer: '<a href="">Why do I have this issue?</a>'
+            })
+            
+        }else if(cart.data.status == true){
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+
+            Toast.fire({
+            icon: 'success',
+            title: 'Added successfully'
+            })
+        }
+    }
+
+
+
+    function addwishlist(productid){
+       result = axios.post('/wishlist',{productid})
+       location.reload()
+    }
+    function removewishlist(productid){
+        console.log(productid)
+        alert('do you want to remove from wish list ')
+        axios.delete(`/wishlist?productId=${productid}`)
+    .then((response)=>{
+        console.log(response);
+    })
+    location.reload()
+    }
+</script>
+<!-- Shop Section End -->
+
+<!-- Footer Section Begin -->
+
+<%- include ('partials/userfooter.ejs') %>
