@@ -1,27 +1,27 @@
 // import modules
 const db = require("../config/mongooseConnection");
-const usersignupdb = require("../Model/userschema/usersuignupmodel");
-const productdb = require("../Model/adminscema/product");
-const cartdb = require("../Model/userschema/Cart");
-const addressdb = require("../Model/userschema/address");
-const orderdb = require("../Model/userschema/order");
-const wishlistdb = require("../Model/userschema/wishlist");
-const categorydb = require("../Model/adminscema/category");
-const coupondb = require("../Model/adminscema/coupon");
-const bannerdb = require("../Model/adminscema/banner");
-// const users = require('../Model/userschema/usersuignupmodel')
+const usersignupdb = require("../model/userschema/usersuignupmodel");
+const productdb = require("../model/adminscema/product");
+const cartdb = require("../model/userschema/Cart");
+const addressdb = require("../model/userschema/address");
+const orderdb = require("../model/userschema/order");
+const wishlistdb = require("../model/userschema/wishlist");
+const categorydb = require("../model/adminscema/category");
+const coupondb = require("../model/adminscema/coupon");
+const bannerdb = require("../model/adminscema/banner");
+// const users = require('../model/userschema/usersuignupmodel')
 const bcrypt = require("bcrypt");
 const { sendotp, verifyotp } = require("../utilities/otp");
 const { default: mongoose } = require("mongoose");
-const { findOneAndUpdate, count, findOne } = require("../Model/userschema/usersuignupmodel");
+const { findOneAndUpdate, count, findOne } = require("../model/userschema/usersuignupmodel");
 var { validatePaymentVerification } = require("../node_modules/razorpay/dist/utils/razorpay-utils");
 const mailer = require("../config/nodemailer");
 const Razorpay = require("razorpay");
 const randomstring = require("randomstring");
-const cart = require("../Model/userschema/Cart");
+const cart = require("../model/userschema/Cart");
 const { ObjectID } = require("bson");
-const category = require("../Model/adminscema/category");
-const product = require("../Model/adminscema/product");
+const category = require("../model/adminscema/category");
+const product = require("../model/adminscema/product");
 
 // user logein--------------------------------------
 const userLoginview = (req, res) => {

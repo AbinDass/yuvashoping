@@ -23,7 +23,7 @@ app.use(flash())
 
 // app.use(multer)
 
-app.set('Views',path.join(__dirname,'Views'))
+app.set('views',path.join(__dirname,'views'))
 app.set('view engine','ejs')
 
 

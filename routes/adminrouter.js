@@ -37,7 +37,7 @@ const {
     Logout,
     yearlyreport,
     changeChart,
-} = require("../Controller/admincontroller");
+} = require("../controller/admincontroller");
 
 const router = express.Router();
 

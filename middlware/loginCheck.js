@@ -1,4 +1,4 @@
-const cartdb = require('../Model/userschema/Cart')
+const cartdb = require('../model/userschema/Cart')
 
 loginCheck = (req,res,next)=>{
 if(req.session.user_detail || req.session.otpverifyed){

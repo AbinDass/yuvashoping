@@ -1,13 +1,13 @@
 const db = require("../config/mongooseConnection");
-const userdb = require("../Model/userschema/usersuignupmodel");
-const categorydb = require("../Model/adminscema/category");
-const productdb = require("../Model/adminscema/product");
-const orderdb = require("../Model/userschema/order");
-const addressdb = require("../Model/userschema/address");
-const { create } = require("../Model/adminscema/category");
-const address = require("../Model/userschema/address");
-const coupondb = require("../Model/adminscema/coupon");
-const bannerdb = require('../Model/adminscema/banner');
+const userdb = require("../model/userschema/usersuignupmodel");
+const categorydb = require("../model/adminscema/category");
+const productdb = require("../model/adminscema/product");
+const orderdb = require("../model/userschema/order");
+const addressdb = require("../model/userschema/address");
+const { create } = require("../model/adminscema/category");
+const address = require("../model/userschema/address");
+const coupondb = require("../model/adminscema/coupon");
+const bannerdb = require('../model/adminscema/banner');
 const { json } = require("express");
 
 const getAdminlogin = (req, res) => {

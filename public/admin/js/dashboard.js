@@ -1,5 +1,5 @@
-// const { salesreport } = require("../../../Controller/admincontroller");
-// const { count } = require("../../../Model/userschema/usersuignupmodel");
+// const { salesreport } = require("../../../controller/admincontroller");
+// const { count } = require("../../../model/userschema/usersuignupmodel");
 
 (function($) {
   'use strict';

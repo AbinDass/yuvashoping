@@ -39,7 +39,7 @@ const {
     searchitems,
 
 
-} = require("../Controller/usercontroller");
+} = require("../controller/usercontroller");
 
 const router = express.Router();
 //search
