@@ -5,7 +5,23 @@ const logger = require('morgan')
 const session = require('express-session')
 const nocache = require('nocache')
 const flash = require('connect-flash')
+const cartdb = require('./model/userschema/Cart')
 // const multer = require('multer')
+
+// app.use(async (req,res,next)=>{
+//     user_profile = req.session.user_detail
+//     if(user_profile){
+//                const userid = req.session.user_detail._id;
+//                const cartitems = await cartdb.findOne({ owner: mongoose.Types.ObjectId(userid) }).populate("items.product");
+//                if( cartitems.items!==null||cartitems.items.length >= 0){
+//                    req.session.cartcount = cartitems.items.length
+//                    Object.assign(user_profile,{cartcount:  req.session.cartcount})
+//                }
+//                next()
+//            }else{
+//             next()
+//            }
+// })
 
 const adminRouter = require('./routes/adminrouter')
 const userRouter = require("./routes/userrouter")

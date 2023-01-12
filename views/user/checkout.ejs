@@ -23,11 +23,7 @@
 <section class="checkout spad">
     <div class="container">
         <div class="checkout__form">
-           <% if (error) { %>
-            <div>
-              <h3 style="color: red;"> <%- error %>  </h3>
-            </div>
-           <% } %>
+           
                 <div class="row">
 
                     <div style=" width: 65%;">
@@ -125,7 +121,13 @@
                                     <% } %> 
                                     
                                         <!-- <a><button type="submit" class="site-btn" onclick="noaddress()" > PLACE ORDER </button></a> -->
-                                   
+                                        <% if (error) { %>
+            
+                                          <div class="alert alert-danger" role="alert">
+                                            <%- error %> 
+                                          </div>
+                                          
+                                         <% } %>
                         </div>
                     </div>
                 </div>

@@ -53,7 +53,8 @@
             <a href="/wishlist"><img src="/user/img/icon/heart.png"  style="width: 25px;" alt=""></a>
             <% if (user_profile) { %> 
                                        
-                <a href="/getcart"><img src="/user/img/icon/cart.png" style="width: 25px; color: #ffffff;" alt=""> <br><span style="width: 30px;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger text-light" id="badge" >  </span></a>
+                <a href="/getcart"><img src="/user/img/icon/cart.png" style="width: 25px; color: #ffffff;" alt=""> <br><span style="width: 30px;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger text-light" id="badge" > <%- user_profile.cartcount%>  </span></a>
+                
                 <% }else{ %>
                 <a href="/getcart"><img src="/user/img/icon/cart.png" style="width: 25px;" alt=""> <br><span style="width: 30px;"></span></a>
            <% } %> 

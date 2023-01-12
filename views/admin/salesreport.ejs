@@ -2,9 +2,12 @@
 <div style="padding: 10%;">
     <h2 style="color: rgb(45, 78, 45);"><b>DAILY SALES REPORT</b></h2>
     <div style="padding: 10%;">
-        <table class="table table-dark" style="width: 200%;">
-            <a href="/admin/monthlyreport" class="btn btn-warning">monthly report</a><br><br>
-            <a href="/admin/yearlyreport" class="btn btn-warning">yearly report</a><br><br>
+         
+        <a href="/admin/monthlyreport" class="btn btn-warning">monthly report</a><br><br>
+        <a href="/admin/yearlyreport" class="btn btn-warning">yearly report</a><br><br>
+
+        <button id="button" onclick="htmlTableToExcel('xlsx')">Export to EXCEL</button> 
+        <table class="table table-dark" id="tblToExcl" style="width: 200%;">
             <thead>
                 <tr>
                     <th scope="col">no of orders</th>
@@ -36,4 +39,12 @@
 </div>
 
 </div>
+<script>
+    function htmlTableToExcel(type){
+ var data = document.getElementById('tblToExcl');
+ var excelFile = XLSX.utils.table_to_book(data, {sheet: "sheet1"});
+ XLSX.write(excelFile, { bookType: type, bookSST: true, type: 'base64' });
+ XLSX.writeFile(excelFile, 'ExportedFile:HTMLTableToExcel' + type);
+}
+</script>
 <%- include('partials/Footer.ejs') %>

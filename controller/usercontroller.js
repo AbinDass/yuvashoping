@@ -128,14 +128,14 @@ const postotp = async (req, res) => {
             }
         });
     } catch (error) {
-        res.redirect('/error')
+        res.redirect("/error");
     }
 };
 // signup ends
 // navigations view
 const userhomeview = async (req, res) => {
     user_profile = req.session.user_detail;
-
+    // console.log(user_profile.cartcount);
     let productlist;
     if (req.query.cat) {
         let cat = req.query.cat;
@@ -146,7 +146,7 @@ const userhomeview = async (req, res) => {
             console.log(req.query.cat + "first");
             console.log(productlist.category + "seconds");
         } catch (error) {
-            res.redirect('/error')
+            res.redirect("/error");
         }
         typeData.typeListing = "catListing";
     } else if (req.query.q) {
@@ -157,7 +157,7 @@ const userhomeview = async (req, res) => {
             console.log(skey);
             productlist = await productdb.find({ _id: skey });
         } catch (error) {
-            res.redirect('/error')
+            res.redirect("/error");
         }
     } else {
         productlist = await productdb.find();
@@ -175,7 +175,7 @@ const userhomeview = async (req, res) => {
     //        }
     //    }
 
-    res.render("user/userhome", { productlist, allcategory, user_profile, banner });
+    res.render("user/userhome", { productlist, allcategory, user_profile ,banner});
 };
 
 const shopnow = async (req, res) => {
@@ -207,7 +207,7 @@ const shopnow = async (req, res) => {
                 console.log(req.query.cat + "first");
                 console.log(productlist.category + "seconds");
             } catch (error) {
-                res.redirect('/error')
+                res.redirect("/error");
             }
             typeData.typeListing = "catListing";
         } else if (req.query.q) {
@@ -218,7 +218,7 @@ const shopnow = async (req, res) => {
                 console.log(skey);
                 productlist = await productdb.find({ _id: skey });
             } catch (error) {
-                res.redirect('/error')
+                res.redirect("/error");
             }
         } else if (req.query.inc) {
             productlist = await productdb.find().sort({ price: 1 });
@@ -244,7 +244,7 @@ const shopnow = async (req, res) => {
                 console.log(req.query.cat + "first");
                 console.log(productlist.category + "seconds");
             } catch (error) {
-                res.redirect('/error')
+                res.redirect("/error");
             }
             typeData.typeListing = "catListing";
         } else if (req.query.q) {
@@ -255,7 +255,7 @@ const shopnow = async (req, res) => {
                 console.log(skey);
                 productlist = await productdb.find({ _id: skey });
             } catch (error) {
-                res.redirect('/error')
+                res.redirect("/error");
             }
         } else if (req.query.inc) {
             productlist = await productdb.find().sort({ price: 1 });
@@ -355,7 +355,7 @@ const addwishlist = async (req, res) => {
             console.log("kkk");
         }
     } catch (error) {
-        res.redirect('/error')
+        res.redirect("/error");
     }
 };
 
@@ -491,13 +491,17 @@ const deletecart = async (req, res) => {
         console.log(req.session.user_detail._id);
         const productId = req.query.productId;
         const product = await productdb.findOne({ _id: productId });
-        console.log("fsdgsfdg");
-        const cart = await cartdb.findOne({ Owner: req.session.user_detail._id });
+        console.log(productId);
+        const cart = await cartdb.findOne({ Owner: req.session.user_detail._id ,"items.product":productId});
+        console.log(cart);
         const index = await cart.items.findIndex((el) => {
             return el.product == productId;
         });
+        console.log("index", index);
+
         const price = cart.items[index].totalPrice;
         const cartTotal = product.price;
+        console.log(cartTotal);
         const deletecart = await cartdb.updateOne(
             { Owner: req.session.user_detail._id },
             {
@@ -507,11 +511,11 @@ const deletecart = async (req, res) => {
                 $inc: { cartTotal: -price },
             }
         );
-        console.log(deletecart);
+        console.log(deletecart, "deletecart");
 
         res.json({ status: true });
     } catch {
-        res.redirect('/error')
+        res.redirect("/error");
     }
 };
 const quantityChange = async (req, res) => {
@@ -622,7 +626,6 @@ const deleteaddress = async (req, res) => {
 // checkout  starts ----------------------------------------
 const checkout = async (req, res) => {
     try {
-        
         console.log(req.path, "fffffffffffffffffffffffffffffffffffffffffffffffff");
         const code = req.query.code;
         const totalaftercoupon = req.query.total;
@@ -640,54 +643,46 @@ const checkout = async (req, res) => {
                     user.users = userid;
                     const usincoupone = await coupondb.findOneAndUpdate({ code: code }, { $addToSet: { useduser: user } });
                     console.log(validcoupen);
-                    
+
                     const updatecart = await cartdb.findOne({ owner: userid });
                     updatecart.cartTotal = totalaftercoupon;
                     await updatecart.save();
                 }
             }
         }
-        
+
         const cartdetails = await cartdb.findOne({ owner: mongoose.Types.ObjectId(userid) }).populate("items.product");
         const useraddress = await addressdb.findOne({ user: userid });
         // let address;
         // if (useraddress) {
-            const address = useraddress.address;
-            //     console.log(address);
-            //     const error = req.flash("error");
-            //     res.render("user/checkout", { address, cartdetails });
-            // } else {
-                //     // res.send('sorry')
-                //         const error = req.flash("error");
-                //         res.render("user/checkout", { address, cartdetails });
-                //     }
-                //     console.log(cartdetails);
-                const error = req.flash("error");
-                res.render("user/checkout", { address, cartdetails,error});
-            } catch (error) {
-                res.redirect('/error')
-            }
-            }
-            
-            
-            
-            const addresscheckout = async (req, res) => {
-                console.log(req.body);
-                const userid = req.session.user_detail._id;
-                await addressdb.findOneAndUpdate({ userid }, { $push: { address: [req.body] } });
+        const address = useraddress.address;
+        //     console.log(address);
+        //     const error = req.flash("error");
+        //     res.render("user/checkout", { address, cartdetails });
+        // } else {
+        //     // res.send('sorry')
+        //         const error = req.flash("error");
+        //         res.render("user/checkout", { address, cartdetails });
+        //     }
+        //     console.log(cartdetails);
+        const error = req.flash("error");
+        res.render("user/checkout", { address, cartdetails, error });
+    } catch (error) {
+        res.redirect("/error");
+    }
+};
+
+const addresscheckout = async (req, res) => {
+    console.log(req.body);
+    const userid = req.session.user_detail._id;
+    await addressdb.findOneAndUpdate({ userid }, { $push: { address: [req.body] } });
 
     const cartdetails = await cartdb.findOne({ owner: mongoose.Types.ObjectId(userid) }).populate("items.product");
     const useraddress = await addressdb.findOne({ user: userid });
     const address = useraddress.address;
     const error = req.flash("error");
-    res.render("user/checkout", { address, cartdetails,error});
-    
+    res.render("user/checkout", { address, cartdetails, error });
 };
-
-
-
-
-
 
 // order starts -----------------------------
 // razorpay instance
@@ -839,7 +834,7 @@ const couponvalidate = async (req, res) => {
 };
 const ordersuccess = async (req, res) => {
     userid = req.session.user_detail._id;
-    const orders = await orderdb.find({ owner: userid }).populate("orderitems.product");
+    const orders = await orderdb.find({ owner: userid }).sort({createdAt:-1})
     // console.log(orders.orderitems[0],'jjjjjjj');
     const cat = await categorydb.find();
     res.render("user/order", { orders, cat });
@@ -857,9 +852,9 @@ const orderdetails = async (req, res) => {
     const index = useraddress.address.findIndex((obj) => obj._id == addressid);
     const selectedaddress = useraddress.address[index];
     const productdetail = orderdetail.orderitems;
-    console.log(orderdetail,'order deetail');
-    console.log(orderdetail.orderitems[0].product,'fdfs');
-    console.log(productdetail,'pdvcv');
+    console.log(orderdetail, "order deetail");
+    console.log(orderdetail.orderitems[0].product, "fdfs");
+    console.log(productdetail, "pdvcv");
     res.render("user/orderdetails", { orderdetail, selectedaddress, productdetail });
 };
 const ordercancel = (req, res) => {
@@ -876,7 +871,7 @@ const forgetpasswordload = async (req, res) => {
     try {
         res.render("user/forget");
     } catch (error) {
-        res.redirect('/error')
+        res.redirect("/error");
     }
 };
 const forgetverify = async (req, res) => {
@@ -917,7 +912,7 @@ const forgetverify = async (req, res) => {
             res.render("user/forget", { message: "email  is  incorrect" });
         }
     } catch (error) {
-        res.redirect('/error')
+        res.redirect("/error");
     }
 };
 const tokenForm = async (req, res) => {

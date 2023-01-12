@@ -13,7 +13,7 @@
 <% if (cartitems == null || cartitems.items == 0 ) { %>  
 
     <div class="row" style="width: 100%;"> 
-       <div>
+       <div class="col-lg-6">
            <img src="/images/image_processing20210909-2838-wqgr1x.gif" alt="" style="justify-content: center;">
        </div>
        <div class="col-lg-6" style="text-align: center;">
@@ -286,7 +286,7 @@
 
 
     async function deleteCart(productId){
-
+        console.log('popo');
      Swal.fire({
   title: 'Are you sure?',
   text: "You won't be remove from cart !",
@@ -296,6 +296,7 @@
   cancelButtonColor: '#d33',
   confirmButtonText: 'remove'
 }).then((result) => {
+    console.log(result,'if jsh jh');
   if (result.isConfirmed) {
      axios.delete(`/deletecart?productId=${productId}`).then((response) => {
      console.log(response);
