@@ -8,9 +8,9 @@
                 <div class="breadcrumb__text">
                     <h4>Check Out</h4>
                     <div class="breadcrumb__links">
-                        <a href="./index.html">Home</a>
-                        <a href="./shop.html">Shop</a>
-                        <span>Check Out</span>
+                        <a href="/">Home</a>
+                        <a href="">Checkout</a>
+                        <!-- <span>Check Out</span> -->
                     </div>
                 </div>
             </div>
@@ -27,13 +27,13 @@
                 <div class="row">
 
                     <div style=" width: 65%;">
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addresschk" style="width: 30%;">ADD ADDRESS</button><br><br>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addresschk" >ADD ADDRESS</button><br><br>
 
                        <br> <h3 style="text-align: center;"> Choose address </h3><br><br>
 
                             <!-- collapse -->
                             
-                            <div id="accordion">
+                            <div id="accordion" >
                               <% if (cartdetails!==null || address !== null || address.length!==0) { %>
                                
                                 <% for( let i = 0; i < address.length; i++ ) { %>
@@ -55,7 +55,7 @@
                                                     <input type="radio" id="html" name="address" value='<%- i %>' style="margin-left: 10%;" >
                                                     <label for="html">SELECT ADDRESS</label><br>
                                                 <% }  %>
-                                               <ul>
+                                               <ul style="list-style-type: none;">
                                                 <li><%- address[i].address %></li>
                                                 <li><%- address[i].phone %></li>
                                                 <li><%- address[i].state %></li>
@@ -105,14 +105,14 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="checkout__input__checkbox">
+                            <!-- <div class="checkout__input__checkbox">
                               <label for="paypal">
                                   Paypal 
                                   <input type="radio" id="paypal" name="paymentmod" value="Paypal" >
                                   <span class="checkmark"></span>
                               </label>
                                 
-                          </div>
+                          </div> -->
                                     <% if (address== null||address.length == 0) { %>
                                      
                                       <a><button type="submit" class="site-btn" onclick="placeorder()"  disabled style="visibility: hidden;"> PLACE ORDER </button></a>
@@ -320,9 +320,9 @@ response=result.data
     "image": "https://example.com/your_logo",
     "order_id": razorpayOrderData.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature)
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature)
         
         varifypayments(response)
 
@@ -356,9 +356,10 @@ async function varifypayments(razorpayOrderData){
       userorderdata,
     }
   })
-  alert("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+  // alert("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
   console.log(varifypayments.data.status);
   if(varifypayments.data.status){
+
     window.location.href = '/order-success'
   }else{
     res.send('not validate')

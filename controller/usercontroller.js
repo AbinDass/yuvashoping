@@ -483,7 +483,7 @@ const addcart = async (req, res) => {
             }
         }
     }
-};
+}
 const deletecart = async (req, res) => {
     try {
         console.log(req.query);

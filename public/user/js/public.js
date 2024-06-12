@@ -16,7 +16,7 @@ function publicSearch (){
 
           '<div class="shop__sidebar__search">' +
                         '<form action="#">'+
-                           ' <input type="text" placeholder="Search..." onkeyup="sendData(this)"  style="width:210%"/>'+
+                           ' <input type="text" class="col-lg-12" placeholder="Search..." onkeyup="sendData(this)" />'+
                            // ' <button type="submit"><span class="icon_search" style="padding-left:80%"></span></button>'+
                        " </form>"+
                     '</div>'+
