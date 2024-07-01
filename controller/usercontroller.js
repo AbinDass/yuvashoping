@@ -885,18 +885,20 @@ const orderdetails = async (req, res) => {
     const orderdetail = await orderdb.findOne({ _id: orderid }).populate("orderitems.product");
     const userid = req.session.user_detail._id;
     const addressid = orderdetail.address.toString();
-    const useraddress = await addressdb.findOne({ addressid });
+    let useraddress = await addressdb.find({ addressid });
 
     // const selectedAddress = useraddress.address._id.find(
     //     (el)=> el._id.toString() === addressid
     // )
-    const index = useraddress.address.findIndex((obj) => {
-        obj._id === addressid
-    });
+    // const index = useraddress.address.findIndex((obj) => {
+    //     obj._id === addressid
+    // });
+    console.log(useraddress,"chummaaa");
+    useraddress = useraddress.find(item => item.user.toString() === userid)
     const selectedaddress = useraddress.address.find(addr => addr._id.toString() === addressid);
     const productdetail = orderdetail.orderitems;
     // console.log(orderdetail.orderitems[0].product, "fdfs");
-    console.log(orderdetail.address,orderid,useraddress.address,addressid, "vayyyaaaaa");
+    console.log(orderdetail.address,orderid,useraddress,addressid, "vayyyaaaaa");
     res.render("user/orderdetails", { orderdetail, selectedaddress, productdetail });
 };
 const ordercancel = (req, res) => {
