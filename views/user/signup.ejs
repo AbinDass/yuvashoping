@@ -21,14 +21,14 @@
 
 
 
-                <form class="form-detail" action="/signup" method="post" id="signupForm">
+                <form class="form-detail"  action="/signup" method="post" id="signupForm">
                     <div class="form-top">
                         <img src="/user/signup/images/yuvafasions.png" alt="logo" />
                     </div>
                     <h2>Sign Up</h2>
 
                     <div class="form-row">
-                        <input type="text" id="fullname" name="fullname" class="input-text" placeholder="Your Name" required  style="width: 80%;"/>
+                        <input type="text"  id="fullname" name="fullname" class="input-text" placeholder="Your Name" required  style="width: 80%;"/>
                         <p id="usercheck" style="color: red;">
                             **Username is missing
                         </p>
@@ -44,6 +44,7 @@
                             required
                             pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"
                             style="width: 80%;"
+                            
                         />
                         <small id="emailvalid" class="form-text
                             text-muted invalid-feedback">
@@ -52,11 +53,11 @@
                     </div>
 
                     <div class="form-row">
-                        <input type="number" id="mobilenumber" name="mobilenumber" class="input-text" placeholder="mobile number" required style="width: 80%;"/>
+                        <input type="number"  id="mobilenumber" name="mobilenumber" class="input-text" placeholder="mobile number" required style="width: 80%;"/>
                     </div>
 
                     <div class="form-row">
-                        <input type="password" id="password" name="password" class="input-text" placeholder="Password" required style="width: 80%;"/>
+                        <input type="password" id="password"  name="password" class="input-text" placeholder="Password" required style="width: 80%;"/>
                         <p id="passcheck" style="color: red;">
                             **Please Fill the password
                         </p>
@@ -70,6 +71,7 @@
                             class="input-text"
                             placeholder="Comfirm Password"
                             required
+                            
                             style="width: 80%;"
                         />
                         <p id="conpasscheck" style="color: red;">
@@ -78,12 +80,15 @@
                     </div>
 
                     <div class="form-row-last">
-                        <input type="submit" class="register" value="register" id="submitbtn"/>
+                        <input type="submit"  class="register" value="register" id="submitbtn"/>
                     </div>
 
+                    
                 </form>
 
-
+                <div>
+                    <p class="" style="color: red;"> Twilio under service , please <span><a href="/login">Login</a></span>  </p>
+                </div>
 
             </div>
         </div>

@@ -34,9 +34,10 @@
                             <!-- collapse -->
                             
                             <div id="accordion" >
-                              <% if (cartdetails!==null || address !== null || address.length!==0) { %>
+                              <% console.log(address) %>
+                              <!-- <% if (cartdetails!==null || address !== null || address !== undefined ) { %> -->
                                
-                                <% for( let i = 0; i < address.length; i++ ) { %>
+                                <% for( let i = 0; i < address?.length; i++ ) { %>
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h5 class="mb-0">
@@ -81,14 +82,14 @@
                         <div class="checkout__order">
                             <h4 class="order__title">Your order</h4>
                             <div class="checkout__order__products">Product <span>Total</span></div>
-                            <% for(cart of cartdetails.items) {%>
+                            <% for(cart of cartdetails?.items) {%>
                             <ul class="checkout__total__products">
-                                <li><%- cart.product.title %> x <%- cart.quantity %> <span><%- cart.totalPrice %></span></li>
+                                <li><%- cart?.product?.title %> x <%- cart?.quantity %> <span><%- cart.totalPrice %></span></li>
                             </ul>
                             <%}%>
                             <ul class="checkout__total__all">
                                 <!-- <li>Subtotal <span>$750.99</span></li> -->
-                                <li>Total Cart <span><%- cartdetails.cartTotal %></span></li> 
+                                <li>Total Cart <span><%- cartdetails?.cartTotal %></span></li> 
                             </ul>
                            
                             <div class="checkout__input__checkbox">
@@ -113,7 +114,7 @@
                               </label>
                                 
                           </div> -->
-                                    <% if (address== null||address.length == 0) { %>
+                                    <% if (address== null||address?.length == 0) { %>
                                      
                                       <a><button type="submit" class="site-btn" onclick="placeorder()"  disabled style="visibility: hidden;"> PLACE ORDER </button></a>
                                     <% }else{ %>

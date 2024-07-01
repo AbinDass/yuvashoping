@@ -103,31 +103,31 @@
                 <p>Address</p><span style="    margin-left: 167px;
                 top: -21px;
                 position: relative;
-                color: black;">: <%- selectedaddress.name %> <br><span style="margin-left: 167px;"><%- selectedaddress.address%></span> </span>
+                color: black;">: <%- selectedaddress?.name %> <br><span style="margin-left: 167px;"><%- selectedaddress?.address%></span> </span>
               </li>
               <li>
                 <p>Phone</p><span style="    margin-left: 167px;
                 top: -21px;
                 position: relative;
-                color: black;">:  <%- selectedaddress.phone %>  </span>
+                color: black;">:  <%- selectedaddress?.phone %>  </span>
               </li>
               <li>
                 <p>City</p><span style="    margin-left: 167px;
                 top: -21px;
                 position: relative;
-                color: black;">:  <%- selectedaddress.city %>  </span>
+                color: black;">:  <%- selectedaddress?.city %>  </span>
               </li>
               <li>
                 <p>State</p><span style="    margin-left: 167px;
                 top: -21px;
                 position: relative;
-                color: black;">: <%- selectedaddress.state %> </span>
+                color: black;">: <%- selectedaddress?.state %> </span>
               </li>
               <li>
                 <p>Pincode</p><span style="    margin-left: 167px;
                 top: -21px;
                 position: relative;
-                color: black;">: <%- selectedaddress.pin %> </span>
+                color: black;">: <%- selectedaddress?.pin %> </span>
               </li>
             </ul>
           </div>
@@ -152,15 +152,15 @@
                 
                 <% orderdetail.orderitems.forEach(element => { %>
                 <tr>
-                  <td colspan="2"> <%- element.product.title %></td>
-                  <td><%- element.quantity %></td>
-                  <td><span> <%- element.product.price %> INR</span></td>
+                  <td colspan="2"> <%- element?.product?.title %></td>
+                  <td><%- element?.quantity %></td>
+                  <td><span> <%- element?.product?.price %> INR</span></td>
                 </tr>
   
                 
                 <tr id="success_subtotal" style="color: black;">
                   <th colspan="3">product discount</th>
-                  <th><%- element.product.discount %> INR</th>
+                  <th><%- element?.product?.discount %> INR</th>
                 </tr>
                 <!-- <tr style="color: black;">
                   <th colspan="3">Shipping</th>
@@ -171,7 +171,7 @@
               <tfoot>
                 <tr style="color: black;">
                   <th colspan="3">Grand Total</th>
-                  <th><%- orderdetail.ordertotal %> INR</th>
+                  <th><%- orderdetail?.ordertotal %> INR</th>
                 </tr>
               </tfoot>
             </table>
